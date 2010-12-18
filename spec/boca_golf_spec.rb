@@ -22,7 +22,7 @@ def sandboxed(&block)
   end
 end
 
-describe "golf" do
+describe BocaGolf do
   it "returns true if all specs pass" do
     FakeWeb.register_uri :get, "http://gist.github.com/746166.txt", body: "def reverse(a) a.reverse; end"
     stdout, stderr = StringIO.new, StringIO.new
@@ -37,5 +37,16 @@ describe "golf" do
     sandboxed do
       BocaGolf.new.run(["http://gist.github.com/746166", "spec/infrastructure/reverse_specs/spec.rb"], stdout, stderr)
     end.should be_false
+  end
+
+  it "doesn't make methods available everywhere" do
+    FakeWeb.register_uri :get, "http://gist.github.com/746166.txt", body: "def foobar(a) a; end"
+    stdout, stderr = StringIO.new, StringIO.new
+    sandboxed do
+      BocaGolf.new.run(["http://gist.github.com/746166", "spec/infrastructure/reverse_specs/spec.rb"], stdout, stderr)
+    end
+    lambda do
+      foobar '1'
+    end.should raise_error NoMethodError
   end
 end
