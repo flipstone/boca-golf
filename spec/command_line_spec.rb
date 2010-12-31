@@ -3,14 +3,14 @@ require_relative 'spec_helper'
 describe BocaGolf::CommandLine do
   it "prints the expected result" do
     gist = "def reverse(a) a.reverse; end"
-    FakeWeb.register_uri :get, "http://gist.github.com/746166.txt", body: gist
+    FakeWeb.register_uri :get, "https://gist.github.com/746166.txt", body: gist
     stdout, stderr = StringIO.new, StringIO.new
 
     sandboxed do
-      BocaGolf::CommandLine.new.run(["http://gist.github.com/746166", "spec/infrastructure/reverse_specs/spec.rb"], stdout, stderr)
+      BocaGolf::CommandLine.new.run(["https://gist.github.com/746166", "spec/infrastructure/reverse_specs/spec.rb"], stdout, stderr)
     end
 
-    stdout.string.should =~ %r|Testing http://gist.github.com/746166 against specs:
+    stdout.string.should =~ %r|Testing https://gist.github.com/746166 against specs:
   - spec/infrastructure/reverse_specs/spec.rb
 
 \.\.\.

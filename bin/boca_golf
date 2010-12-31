@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+#
+
+require 'boca_golf'
+
+BocaGolf::CommandLine.new.run ARGV, $stdout, $stderr
+

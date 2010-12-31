@@ -18,10 +18,10 @@ describe BocaGolf do
     gist.taint
     gist.untrust
 
-    FakeWeb.register_uri :get, "http://gist.github.com/746166.txt", body: gist
+    FakeWeb.register_uri :get, "https://gist.github.com/746166.txt", body: gist
     stdout, stderr = StringIO.new, StringIO.new
     sandboxed do
-      BocaGolf.new.run(["http://gist.github.com/746166", "spec/infrastructure/reverse_specs/spec.rb"], stdout, stderr)
+      BocaGolf.new.run(["https://gist.github.com/746166", "spec/infrastructure/reverse_specs/spec.rb"], stdout, stderr)
     end
   end
 end

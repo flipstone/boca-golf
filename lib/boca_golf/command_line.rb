@@ -1,6 +1,8 @@
 class BocaGolf
   class CommandLine
     def run(args, stdout, stderr)
+      ::Rspec::Core::Runner.disable_autorun!
+
       gist_location, *specs = *args
       stdout.puts "Testing #{gist_location} against specs:"
       specs.each do |spec|

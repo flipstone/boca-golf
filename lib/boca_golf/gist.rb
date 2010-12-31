@@ -3,7 +3,10 @@ class BocaGolf
     attr_reader :code
 
     def self.load_from_url(gist_url)
-      new Net::HTTP.get(URI.parse(gist_url + ".txt"))
+      uri = URI.parse(gist_url + ".txt")
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.start { new http.get(uri.to_s).body }
     end
 
     def initialize(code)

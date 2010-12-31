@@ -33,8 +33,8 @@ describe BocaGolf::Gist do
   describe "load_from_url" do
     it "requests the .txt version of gist" do
       code = "def a(); end"
-      FakeWeb.register_uri :get, "http://gist.github.com/746166.txt", body: code
-      BocaGolf::Gist.load_from_url("http://gist.github.com/746166").code.should == code
+      FakeWeb.register_uri :get, "https://gist.github.com/746166.txt", body: code
+      BocaGolf::Gist.load_from_url("https://gist.github.com/746166").code.should == code
     end
   end
 end

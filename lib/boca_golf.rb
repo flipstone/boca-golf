@@ -1,3 +1,6 @@
+require 'net/http'
+require 'rspec'
+
 require 'boca_golf/checker'
 require 'boca_golf/command_line'
 require 'boca_golf/gist'
