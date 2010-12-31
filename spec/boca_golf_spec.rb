@@ -1,8 +1,17 @@
 require_relative 'spec_helper'
 
 describe BocaGolf do
-  it "returns true if all specs pass" do
-    run_specs_on_gist("def reverse(a) a.reverse; end").should be_true
+  it "passes if all specs passed" do
+    run_specs_on_gist("def reverse(a) a.reverse; end").should be_passed
+  end
+
+  it "doesn't pass if not all specs pass" do
+    run_specs_on_gist("def reverse(a) a; end").should_not be_passed
+  end
+
+  it "scores the gist" do
+    run_specs_on_gist("def reverse(a) a.reverse; end")
+    .score.should == 29
   end
 
   def run_specs_on_gist(gist)
