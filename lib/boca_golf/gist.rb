@@ -2,11 +2,22 @@ class BocaGolf
   class Gist
     attr_reader :code
 
+    URI_REGEXP = URI.regexp(['http', 'https', 'ftp'])
+
+    def self.load_from_location(location)
+      if location =~ URI_REGEXP
+        load_from_url location
+      else
+        load_from_file location
+      end
+    end
+
     def self.load_from_url(gist_url)
-      uri = URI.parse(gist_url + ".txt")
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      http.start { new http.get(uri.to_s).body }
+      new URI.parse(gist_url + ".txt").read
+    end
+
+    def self.load_from_file(file)
+      new File.read(file)
     end
 
     def initialize(code)

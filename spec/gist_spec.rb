@@ -37,4 +37,24 @@ describe BocaGolf::Gist do
       BocaGolf::Gist.load_from_url("https://gist.github.com/746166").code.should == code
     end
   end
+
+  describe "load_from_file" do
+    it "reads the file from disk" do
+      File.should_receive(:read).with("/foo/bar.rb").and_return(code = "def a(); end")
+      BocaGolf::Gist.load_from_file("/foo/bar.rb").code.should == code
+    end
+  end
+
+  describe "load_from_location" do
+    it "loads from url when argument is a valid url" do
+      code = "def a(); end"
+      FakeWeb.register_uri :get, "https://gist.github.com/746166.txt", body: code
+      BocaGolf::Gist.load_from_location("https://gist.github.com/746166").code.should == code
+    end
+
+    it "loads from file when argument is not a full url" do
+      File.should_receive(:read).with("/foo/bar.rb").and_return(code = "def a(); end")
+      BocaGolf::Gist.load_from_location("/foo/bar.rb").code.should == code
+    end
+  end
 end
