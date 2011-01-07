@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email       = ["david@flipstone.com"]
   s.homepage    = "https://github.com/flipstone/boca-golf"
   s.summary     = %q{A simple rspec-based engine for playing ruby golf coding problems}
-  s.description = %q{boca-golf with securely load and run from the filesystem or a gist url,
+  s.description = %q{boca-golf securely loads and runs code from the filesystem or a gist url,
 execute a user-specified set of rspec examples against it, and also print of the score
 (# number of charaters - lower == better!).  It was built for playing ruby golf at the
 Boca Ruby Meetup sessions.
