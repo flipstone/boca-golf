@@ -1,0 +1,88 @@
+== Boca Golf
+
+A simple command line utility for playing ruby golf with problems defined via RSpec examples.
+
+In ruby golf, you need to write a function that passes the provided specs in the fewest characters you can.
+
+== Install
+
+gem install boca-golf
+
+== Get Some Problems
+
+git clone git://github.com/flipstone/boca-golf-problems.git
+
+== Write a File
+
+in my_solution.rb:
+
+  def sanitize(word, string)
+    ... your implementation ...
+  end
+
+then:
+
+  boca-golf my_solution.rb boca-golf-problems/sanitize/spec.rb
+
+
+and see:
+
+  Testing my_solution.rb against specs:
+    - boca-golf-problems/sanitize/spec.rb
+
+  ...
+
+  Finished in 0.0007 seconds
+  3 examples, 0 failures
+
+  Code:
+  def sanitize(word, string)
+    ... your implementation ...
+  end
+
+  Score:
+  <# of characters in your solution>
+
+
+== Upload your answer
+
+Go to https://gist.github.com/ and create a gist with your solution
+
+then someone can run it with:
+
+  boca-golf <your gist url> boca-golf-problems/sanitize/spec.rb
+
+== Create your own problems!
+
+Simply create an rspec examples file, decide on what coders should
+name the method, and call it!
+
+in my_spec.rb:
+
+  describe "reverse" do
+    it "reverses the string" do
+      reverse("foo").should == "oof"
+    end
+  end
+
+then:
+
+  boca-golf solution.rb my_spec.rb
+
+And send your problems in and we'll give you credit in the boca-golf-problems
+repo!
+
+Happy Golfing!
+
+== Security
+
+  boca-golf runs all code from potential solutions at $SAFE = 4, so you
+  don't need to worry about someone's gist wrecking your system.  That
+  being said, we are not liable for any damage caused to your system by
+  untrusted code.  Always run untrusted code at your own risk.
+
+  Problem definitions, on the other hand, are run at $SAFE = 0, so you
+  can access any part of ruby you want within the RSpec examples you
+  write for your problems.  That also means you should be sure you trust
+  whomever is defining the problems you're running with boca-golf.
+
