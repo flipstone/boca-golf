@@ -46,7 +46,7 @@ and see:
 
 == Upload your answer
 
-Go to https://gist.github.com/ and create a gist with your solution
+Go to https://gist.github.com and create a gist with your solution
 
 then someone can run it with:
 
@@ -76,13 +76,13 @@ Happy Golfing!
 
 == Security
 
-  boca-golf runs all code from potential solutions at $SAFE = 4, so you
-  don't need to worry about someone's gist wrecking your system.  That
-  being said, we are not liable for any damage caused to your system by
-  untrusted code.  Always run untrusted code at your own risk.
+boca-golf runs all code from potential solutions at $SAFE = 4, so you
+don't need to worry about someone's gist wrecking your system.  That
+being said, we are not liable for any damage caused to your system by
+untrusted code.  Always run untrusted code at your own risk.
 
-  Problem definitions, on the other hand, are run at $SAFE = 0, so you
-  can access any part of ruby you want within the RSpec examples you
-  write for your problems.  That also means you should be sure you trust
-  whomever is defining the problems you're running with boca-golf.
+Problem definitions, on the other hand, are run at $SAFE = 0, so you
+can access any part of ruby you want within the RSpec examples you
+write for your problems.  That also means you should be sure you trust
+whomever is defining the problems you're running with boca-golf.
 
