@@ -24,4 +24,13 @@ def reverse\(a\) a.reverse; end
 Score:
 29|
   end
+
+  it "prints usage when not enough arguments are supplied" do
+    stdout, stderr = StringIO.new, StringIO.new
+    sandboxed do
+      BocaGolf::CommandLine.new.run([], stdout, stderr)
+    end
+
+    stderr.string.should =~ %r{Usage: boca-golf file_or_gist_url spec_file \.\.\.}
+  end
 end
