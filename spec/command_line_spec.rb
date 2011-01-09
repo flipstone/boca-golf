@@ -33,4 +33,13 @@ Score:
 
     stderr.string.should =~ %r{Usage: boca-golf file_or_gist_url spec_file \.\.\.}
   end
+
+  it "prints useful error when file does not exist" do
+    stdout, stderr = StringIO.new, StringIO.new
+    sandboxed do
+      BocaGolf::CommandLine.new.run(["boca-golf-foobar.rb", "spec/infrastructure/reverse_specs/spec.rb"], stdout, stderr)
+    end
+
+    stderr.string.should =~ %r{No such file or directory - boca-golf-foobar.rb}
+  end
 end

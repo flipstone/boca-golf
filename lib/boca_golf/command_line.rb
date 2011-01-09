@@ -24,6 +24,8 @@ class BocaGolf
       stdout.puts result.gist.code
       stdout.puts "\nScore:"
       stdout.puts result.score
+    rescue => e
+      stderr.puts e.message
     end
 
     def show_usage(stdout, stderr)
