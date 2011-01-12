@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require File.expand_path(File.join(File.dirname(__FILE__), 'spec_helper'))
 
 describe BocaGolf::Gist do
   describe "safe_module" do
@@ -9,7 +9,7 @@ describe BocaGolf::Gist do
     end
 
     it "evals code at safe level 4" do
-      -> do
+      lambda do
         BocaGolf::Gist.new(%{
           def reverse(a) a.reverse; end;
           class ::Object; def foo() end; end
@@ -26,14 +26,14 @@ describe BocaGolf::Gist do
         }).safe_module
       end
 
-      -> { o.foo }.should raise_error(SecurityError)
+      lambda { o.foo }.should raise_error(SecurityError)
     end
   end
 
   describe "load_from_url" do
     it "requests the .txt version of gist" do
       code = "def a(); end"
-      FakeWeb.register_uri :get, "https://gist.github.com/746166.txt", body: code
+      FakeWeb.register_uri :get, "https://gist.github.com/746166.txt", :body => code
       BocaGolf::Gist.load_from_url("https://gist.github.com/746166").code.should == code
     end
   end
@@ -48,7 +48,7 @@ describe BocaGolf::Gist do
   describe "load_from_location" do
     it "loads from url when argument is a valid url" do
       code = "def a(); end"
-      FakeWeb.register_uri :get, "https://gist.github.com/746166.txt", body: code
+      FakeWeb.register_uri :get, "https://gist.github.com/746166.txt", :body => code
       BocaGolf::Gist.load_from_location("https://gist.github.com/746166").code.should == code
     end
 

@@ -1,5 +1,5 @@
 # encoding: utf-8
-require_relative 'spec_helper'
+require File.expand_path(File.join(File.dirname(__FILE__), 'spec_helper'))
 
 describe BocaGolf::Scorer do
   describe "score" do

@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require File.expand_path(File.join(File.dirname(__FILE__), 'spec_helper'))
 
 describe BocaGolf::Checker do
   it "returns true if all specs pass" do
@@ -11,7 +11,7 @@ describe BocaGolf::Checker do
 
   it "doesn't make methods available everywhere" do
     run_specs_on_gist "def foobar(a) a; end"
-    -> { foobar '1' }.should raise_error NoMethodError
+    lambda { foobar '1' }.should raise_error NoMethodError
   end
 
   def run_specs_on_gist(code)

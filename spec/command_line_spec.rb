@@ -1,9 +1,9 @@
-require_relative 'spec_helper'
+require File.expand_path(File.join(File.dirname(__FILE__), 'spec_helper'))
 
 describe BocaGolf::CommandLine do
   it "prints the expected result" do
     gist = "def reverse(a) a.reverse; end"
-    FakeWeb.register_uri :get, "https://gist.github.com/746166.txt", body: gist
+    FakeWeb.register_uri :get, "https://gist.github.com/746166.txt", :body => gist
     stdout, stderr = StringIO.new, StringIO.new
 
     sandboxed do

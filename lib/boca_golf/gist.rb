@@ -34,10 +34,10 @@ class BocaGolf
     protected
 
     def insecure_module
-      -> do
+      lambda do
         $SAFE = 4
         Module.new.tap do |m|
-          m.module_eval code
+          m.module_eval code, "__GIST__"
         end
       end.call
     end
@@ -45,14 +45,14 @@ class BocaGolf
     def proxy_module(mod)
       Module.new.tap do |proxy|
         mod.instance_methods.each do |method|
-          proxy.module_eval %{
+          proxy.module_eval <<-end_code, __FILE__, (__LINE__ + 1)
             def #{method}(*args, &block)
-              -> do
+              lambda do
                 $SAFE = 4
-                super
+                super(*args, &block)
               end.call
             end
-          }
+          end_code
         end
       end
     end
