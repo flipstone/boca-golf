@@ -15,6 +15,8 @@ execute a user-specified set of rspec examples against it, and also print of the
 (# number of charaters - lower == better!).  It was built for playing ruby golf at the
 Boca Ruby Meetup sessions.
   }
+  s.add_dependency 'rspec', '~> 2.3'
+  s.add_development_dependency 'fakeweb', '>= 1.3.0'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
