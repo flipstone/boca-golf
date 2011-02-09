@@ -28,6 +28,18 @@ describe BocaGolf::Gist do
 
       lambda { o.foo }.should raise_error(SecurityError)
     end
+
+    it "allows recursion in solutions" do
+      o = Object.new.tap do |o|
+        o.extend BocaGolf::Gist.new(%{
+          def foo(n)
+            n > 0 ? foo(n - 1) : :done
+          end
+        }).safe_module
+      end
+
+       o.foo(1).should == :done
+    end
   end
 
   describe "load_from_url" do

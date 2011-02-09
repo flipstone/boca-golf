@@ -48,7 +48,7 @@ class BocaGolf
           proxy.module_eval <<-end_code, __FILE__, (__LINE__ + 1)
             def #{method}(*args, &block)
               lambda do
-                $SAFE = 4
+                $SAFE = 4 if $SAFE < 4
                 super(*args, &block)
               end.call
             end
